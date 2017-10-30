@@ -15,6 +15,10 @@
 
 
 <a href="canciones?accion=<%=Acciones.LISTAR%>">Listar Canciones</a>
+
+<a href="usuarios?accion=<%=Acciones.LISTAR%>">Listar Usuarios</a>
+
+
 <!-- 
 <a href="${pageContext.request.contextPath}/canciones">ACCIONES canciones</a>
  

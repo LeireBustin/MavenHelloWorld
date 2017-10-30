@@ -8,12 +8,27 @@ public class Usuario {
 	private String email;
 	private String avatar;
 	
-	public Usuario( String nombre, String pass, String email) {
-		super();		
+	public Usuario() {
+		super();
+		this.id = -1;
+		this.nombre =  "";
+		this.pass =  "";
+		this.email =  "";
+		this.avatar = "";
+	}
+	
+	
+
+	public Usuario(int id, String nombre, String pass, String email, String avatar) {
+		super();
+		this.id = id;
 		this.nombre = nombre;
 		this.pass = pass;
 		this.email = email;
+		this.avatar = avatar;
 	}
+
+
 
 	public int getId() {
 		return id;
