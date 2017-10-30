@@ -35,9 +35,9 @@ public class UsuarioDAO implements Persistable<Usuario> {
 	 *            String cadena a buscar
 	 * @return Listado de Usuarios limitado por <code>LIMIT</code>, vacia si no encentra nada
 	 */
-	public List<Usuario> findByName(String criterio) {
+	public List<Usuario> findByNameOrEmail(String criterio) {
 		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-		String sql = "SELECT `id`, `nombre`, `email`, `duracion`, `cover` FROM `usuario` WHERE  `nombre` LIKE ? OR `email` LIKE ? ORDER BY `id` DESC LIMIT ?;";
+		String sql = "SELECT `id`, `nombre`, `pass`, `email`, `avatar` FROM `usuario` WHERE  `nombre` LIKE ? OR `email` LIKE ? ORDER BY `id` DESC LIMIT ?;";
 		try (Connection con = ConnectionManager.open(); PreparedStatement pst = con.prepareStatement(sql);) {
 
 			pst.setString(1, "%" + criterio + "%");
@@ -45,11 +45,11 @@ public class UsuarioDAO implements Persistable<Usuario> {
 			pst.setInt(3, Persistable.LIMIT);
 
 			try (ResultSet rs = pst.executeQuery();) {
-				Usuario c;
+				Usuario u;
 				while (rs.next()) {
-					c = mapeo(rs);
-					usuarios.add(c);
-					c = null;
+					u = mapeo(rs);
+					usuarios.add(u);
+					u = null;
 				}
 			}
 

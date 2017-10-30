@@ -2,31 +2,31 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <c:choose>
-	<c:when test="${ cancion.id == -1 }"><h1>Crear Nueva Canción</h1></c:when>
-	<c:otherwise><h1>Detalle ${cancion.nombre}</h1></c:otherwise>
+	<c:when test="${ usuario.id == -1 }"><h1>Crear nuevo usuario</h1></c:when>
+	<c:otherwise><h1>Detalle ${usuario.nombre}</h1></c:otherwise>
 </c:choose>
 
-<form action="canciones" method="post">
-
+<form action="usuarios" method="post">
+<!-- CAMBIAR A REGISTRO Y LOGIN -->
 	<!-- campos ocultos -->
-	<input type="hidden" name="id" value="${cancion.id}">
+	<input type="hidden" name="id" value="${usuario.id}">
 	<input type="hidden" name="accion" value="<%=Acciones.CREAR_MODIFICAR%>">
 	
 	<!-- campos editables por el usuario -->
 	<label for="nombre">Nombre:</label>
-	<input type="text" name="nombre" value="${cancion.nombre}" required>
+	<input type="text" name="nombre" value="${usuario.nombre}" required>
 	<br>
 	
-	<label for="artista">Artista:</label>
-	<input type="text" name="artista" value="${cancion.artista}" required>
+	<label for="pass">Password:</label>
+	<input type="text" name="pass" value="${usuario.pass}" required>
 	<br>
 	
-	<label for="duracion">Duración:</label>
-	<input type="text" name="duracion" value="${cancion.duracion}" required>
+	<label for="email">Email:</label>
+	<input type="text" name="email" value="${usuario.email}" required>
 	<br>
 	
-	<label for="cover">Cover:</label>
-	<input type="text" name="cover" value="${cancion.cover}">
+	<label for="avatar">Avatar:</label>
+	<input type="text" name="avatar" value="${usuario.avatar}">
 	<br>
 	
 	

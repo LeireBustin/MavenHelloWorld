@@ -13,7 +13,7 @@ import com.acme.maven.modelo.dao.UsuarioDAO;
 import com.acme.maven.modelo.pojo.Usuario;
 
 /**
- * Servlet implementation class CancionesController
+ * Servlet implementation class UsuariosController
  */
 @WebServlet("/usuarios")
 public class UsuariosController extends HttpServlet {
@@ -98,7 +98,7 @@ public class UsuariosController extends HttpServlet {
 	}
 
 	/**
-	 * Busca Usuarios por la coincidencia del 'nombre' o 'artista'
+	 * Busca Usuarios por la coincidencia del 'nombre' o 'email'
 	 * 
 	 * @param request
 	 */

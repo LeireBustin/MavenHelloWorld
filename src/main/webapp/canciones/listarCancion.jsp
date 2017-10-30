@@ -1,4 +1,4 @@
-<%@page import="com.acme.maven.pojo.Cancion" %>
+<%@page import="com.acme.maven.modelo.pojo.Cancion" %>
 <%@page import="java.util.ArrayList" %>
 <%@page import="java.util.Iterator" %>
 

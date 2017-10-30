@@ -4,7 +4,7 @@
 <p style="color:red;">${msg}</p>
 
 
-<form action="canciones" method="get">
+<form action="usuarios" method="get">
 	<input type="hidden" name="accion" value="<%=Acciones.BUSCAR%>">
 	<input type="search" name="criterio" placeholder="Buscar por nombre o artista" required>
 	<button type="submit">BUSCAR</button>
@@ -12,14 +12,14 @@
 
 
 
-<a href="canciones?accion=<%=Acciones.MOSTRAR_FORMULARIO%>">CREAR CANCION</a>
+<a href="canciones?accion=<%=Acciones.MOSTRAR_FORMULARIO%>">CREAR USUARIO</a>
 
 <ul>
-<c:forEach items="${canciones}" var="cancion">
+<c:forEach items="${usuarios}" var="usuario">
 	<li>
-		${cancion.nombre}   
-		<a href="canciones?accion=<%=Acciones.MOSTRAR_FORMULARIO%>&id=${cancion.id}">DETALLE</a>
-		<a href="canciones?id=${cancion.id}&accion=<%=Acciones.ELIMINAR%>">***Eliminar***</a>
+		${usuario.nombre}   
+		<a href="usuarios?accion=<%=Acciones.MOSTRAR_FORMULARIO%>&id=${usuario.id}">DETALLE</a>
+		<a href="usuarios?id=${usuario.id}&accion=<%=Acciones.ELIMINAR%>">***Eliminar***</a>
 	</li>	
 </c:forEach>
 </ul>
