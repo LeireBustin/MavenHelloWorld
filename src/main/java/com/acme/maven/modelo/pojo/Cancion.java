@@ -21,6 +21,19 @@ public class Cancion {
 
 
 
+	public Cancion(int id, String nombre, String artista, String duracion, String cover) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.artista = artista;
+		this.duracion = duracion;
+		this.cover = cover;
+	}
+
+
+
+
+
 	public String getCover() {
 		return cover;
 	}

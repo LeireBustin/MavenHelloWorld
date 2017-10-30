@@ -24,7 +24,7 @@ public class TestCancionDAO {
 	static final String NOMBRE = "Soldadito marinero";
 	static final String ARTISTA = "Fito y los Fiti";
 	static final String DURACION = "3:59";
-	static final String COVER = "hgklg";
+	static final String COVER = "http://1.bp.blogspot.com/-ECbO0u4Leyc/VUPO-S7WZiI/AAAAAAAAF3k/gkGx8g3nN5U/s1600/soldadito-marinero-fito-fitipaldis.jpg";
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -40,7 +40,7 @@ public class TestCancionDAO {
 	@Before
 	public void setUp() throws Exception {
 		
-		//Crear Pojo
+		// Crear Pojo
 		cancionMock = new Cancion();
 		cancionMock.setNombre(NOMBRE);
 		cancionMock.setArtista(ARTISTA);
@@ -48,14 +48,14 @@ public class TestCancionDAO {
 		cancionMock.setCover(COVER);
 		
 		
-		//Insertar Pojo en la BBDD
+		// Insertar Pojo en la BBDD
 		assertTrue(dao.create(cancionMock));
 	}
 
 	@After
 	public void tearDown() throws Exception {
 		
-		//eliminar de la BBDD
+		// eliminar de la BBDD
 		assertTrue(dao.delete(cancionMock.getId()));
 		cancionMock = null;
 	}
@@ -70,7 +70,7 @@ public class TestCancionDAO {
 		assertFalse("No se puede crear null", dao.create(null));
 		
 		cancionMock.setNombre("sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-		assertFalse("No se puede crear un nombe tan largo", dao.create(cancionMock));
+		assertFalse("No se puede crear un nombe tan largo: campo nombre > VARCHAR(150)", dao.create(cancionMock));
 	}
 	
 	@Test
@@ -89,8 +89,8 @@ public class TestCancionDAO {
 		cancionMock.setDuracion(duracionUpdate);
 		cancionMock.setCover(coverUpdate);
 		
-		//creamos
-		assertTrue(dao.update(cancionMock, id));
+		// creamos
+		assertTrue("No modifica", dao.update(cancionMock, id));
 		
 		assertEquals(id, cancionMock.getId());
 		assertEquals(nombreUpdate, cancionMock.getNombre());
@@ -98,48 +98,48 @@ public class TestCancionDAO {
 		assertEquals(duracionUpdate, cancionMock.getDuracion());
 		assertEquals(coverUpdate, cancionMock.getCover());
 		
-		//comprobar q funcione lo que no deberia
+		// comprobar que funcione cuando no deberia funcionar
 		assertFalse("No se puede modificar lo que no existe", dao.update(cancionMock, 0));
-		assertFalse("No se puede modificar/meter un null", dao.update(null, id));//TODO
+		assertFalse("No se puede modificar/meter un null", dao.update(null, id));//TODO ?
 		
 	}
 	
 	@Test
-	public void testFindById() {
+	public void testFindAll() {
 		
 		ArrayList<Cancion> canciones = (ArrayList<Cancion>) dao.findAll();
 		assertNotNull(canciones);
 		
 		int contadorCanciones = canciones.size();
-		assertTrue("Las canciones >=0 y <=100 ", contadorCanciones >= 0 && contadorCanciones <= Persistable.LIMIT );
+		assertTrue("Las canciones >=0 y <= 100 (LIMIT) ", contadorCanciones >= 0 && contadorCanciones <= Persistable.LIMIT );
 		
 		//insertamos 2 canciones
 		dao.create(cancionMock);
 		dao.create(cancionMock);
 		
 		ArrayList<Cancion> canciones2 = (ArrayList<Cancion>) dao.findAll();
-		assertEquals(contadorCanciones+2, canciones2);
+		assertEquals(contadorCanciones + 2, canciones2.size());
 		
+		assertTrue("No ordena descendentemente por Id", canciones2.get(0).getId() > canciones2.get(1).getId());
 		
-		//TODO
 		
 	}
 	
 	@Test
 	public void testFindById() {
-		
+
 		assertNull("No se puede buscar lo que no existe", dao.findById(0));
 		
 		Cancion cBuscada = dao.findById(cancionMock.getId());
-		assertNotNull();
-		assertEquals(id, cancionMock.getId());
-		/*
-		assertEquals(nombreUpdate, cancionMock.getNombre());
-		assertEquals(nombreUpdate, cancionMock.getNombre());
-		assertEquals(nombreUpdate, cancionMock.getNombre());
-		assertEquals(nombreUpdate, cancionMock.getNombre());
-		*/
-	}//TODO
+		assertNotNull(cBuscada);
+		//assertEquals(id, cancionMock.getId());
+		
+		assertEquals(cBuscada.getId(), cancionMock.getId());
+		assertEquals(cBuscada.getNombre(), cancionMock.getNombre());
+		assertEquals(cBuscada.getArtista(), cancionMock.getArtista());
+		assertEquals(cBuscada.getCover(), cancionMock.getCover());
+		assertEquals(cBuscada.getDuracion(), cancionMock.getDuracion());
+	}
 	
 	
 	

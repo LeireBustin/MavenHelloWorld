@@ -20,7 +20,7 @@ public interface Persistable<P> {
 	 * 				int identificador
 	 * @return Pojo si lo enccuentra, null en caso contrario
 	 */
-	P findById();
+	P findById(int id);
 	
 	/**
 	 * Inserta un nuevo registro por su identificador
@@ -39,15 +39,15 @@ public interface Persistable<P> {
 	 */
 	boolean update(P pojo, int id);
 	
-	//TODO REVISAR
-	/**
-	 * Eliminar un Pojo pasandole su identificador
+	
+	/** Eliminar un Pojo pasandole su identificador:
+	 * Eliminar el Registro de la bbdd correspondiente a su identificador
+	 * 
 	 * @param id
-	 * 				identificador del registro en la bbdd, si es < 1 retorna false
-	 * @return true si insertado correctamente, false en caso contrario o si id < 1
+	 *            identificador
+	 * @return true si elimina, false en caso contrario
 	 */
 	boolean delete(int id);
-	
 	
 	
 }
